@@ -41,4 +41,4 @@ RUN yum install -y dovecot \
     echo 'mailbox_command = /usr/libexec/dovecot/dovecot-lda -f "$SENDER" -a "$RECIPIENT"' >> /etc/postfix/main.cf && \
     echo "root:           fitzhenk" >> /etc/aliases && \
     newaliases
-RUN postfix start && /usr/sbin/dovecot -F -c /etc/dovecot/dovecot.conf && postfix start
+CMD postfix start && /usr/sbin/dovecot -F -c /etc/dovecot/dovecot.conf && postfix start
