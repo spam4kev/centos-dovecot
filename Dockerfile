@@ -6,6 +6,7 @@ EXPOSE 143 993 25
 RUN yum update -y
 RUN yum install -y dovecot && \
                    postfix && \
+    useradd -u 2002 fitzhenk && \
     sed -i 's/#protocols =/protocols =/' /etc/dovecot/dovecot.conf && \
     echo 'postmaster_address = spam4kev@gmail.com' >> /etc/dovecot/dovecot.conf && \
     sed -i 's/CN=imap.example.com/CN=dovecot.fitznet.local/' /etc/pki/dovecot/dovecot-openssl.cnf && \
@@ -37,6 +38,8 @@ smtpd_tls_cert_file = /etc/ssl/certs/smtpd.crt" >> /etc/postfix/main.cf && \
     touch /etc/ssl/certs/smtpd.key && \
     chmod 600 /etc/ssl/certs/smtpd.key && \
     openssl genrsa 1024 > /etc/ssl/certs/smtpd.key && \
-    openssl req -new -key /etc/ssl/certs/smtpd.key -x509 -days 3650 -config /etc/pki/dovecot/dovecot-openssl.cnf -out /etc/ssl/certs/smtpd.key
-    echo 'mailbox_command = /usr/libexec/dovecot/dovecot-lda -f "$SENDER" -a "$RECIPIENT"' >> /etc/postfix/main.cf
+    openssl req -new -key /etc/ssl/certs/smtpd.key -x509 -days 3650 -config /etc/pki/dovecot/dovecot-openssl.cnf -out /etc/ssl/certs/smtpd.key && \
+    echo 'mailbox_command = /usr/libexec/dovecot/dovecot-lda -f "$SENDER" -a "$RECIPIENT"' >> /etc/postfix/main.cf && \
+    echo "root:           fitzhenk" >> /etc/aliases && \
+    newaliases
 RUN postfix start && /usr/sbin/dovecot -F -c /etc/dovecot/dovecot.conf && postfix start
