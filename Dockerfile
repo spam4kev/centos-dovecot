@@ -37,5 +37,5 @@ smtpd_tls_cert_file = /etc/ssl/certs/smtpd.crt" >> /etc/postfix/main.cf && \
     touch /etc/ssl/certs/smtpd.key && \
     chmod 600 /etc/ssl/certs/smtpd.key && \
     openssl genrsa 1024 > /etc/ssl/certs/smtpd.key && \
-    openssl req -new -key /etc/ssl/certs/smtpd.key -x509 -days 3650 -config /etc/pki/dovecot/dovecot-openssl.cnf -out /etc/ssl/certs/smtpd.key && \
+    openssl req -new -key /etc/ssl/certs/smtpd.key -x509 -days 3650 -config /etc/pki/dovecot/dovecot-openssl.cnf -out /etc/ssl/certs/smtpd.key
 RUN postfix start && /usr/sbin/dovecot -F -c /etc/dovecot/dovecot.conf && postfix start
