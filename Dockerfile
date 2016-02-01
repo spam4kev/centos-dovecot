@@ -4,7 +4,7 @@ MAINTAINER "kev" spam4kev@gmail.com
 EXPOSE 143 993 25 
 
 RUN yum update -y
-RUN yum install -y dovecot && \
+RUN yum install -y dovecot \
                    postfix && \
     useradd -u 2002 fitzhenk && \
     sed -i 's/#protocols =/protocols =/' /etc/dovecot/dovecot.conf && \
