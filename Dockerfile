@@ -14,6 +14,28 @@ RUN yum install -y dovecot && \
     sed -i 's/#mail_privileged_group =/mail_privileged_group = mail/' /etc/dovecot/conf.d/10-mail.conf && \
     sed -i 's/auth_mechanisms = plain/auth_mechanisms = plain login/' /etc/dovecot/conf.d/10-auth.conf && \
     sed -i '/unix_listener \/var\/spool\/postfix\/private\/auth/,/  #\}/{s/#/ /g;}' /etc/dovecot/conf.d/10-master.conf && \
+    sed -i 's/#mydomain = domain.tld/mydomain = fitznet.local/' /etc/postfix/main.cf && \
+    sed -i 's/#myorigin/myorigin/' /etc/postfix/main.cf && \
+    sed -i 's/#myhostname = host.domain.tld/myhostname = dovecot.fitznet.local/' /etc/postfix/main.cf && \
+    sed -i 's/#mynetworks = 168.100.189.0\/28/mynetworks = 10.11.11.0\/24/' /etc/postfix/main.cf && \
+    sed -i 's/inet_interfaces = localhost/inet_interfaces = all/' /etc/postfix/main.cf && \
+    echo "0.0.0.0 OK" >> /etc/postfix/access && \
+    echo "smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+smtpd_sasl_auth_enable = yes
+broken_sasl_auth_clients = yes
+smtpd_recipient_restrictions =
+   permit_mynetworks
+   permit_sasl_authenticated
+   reject_unauth_destination
+" >> /etc/postfix/main.cf && \
+    echo "smtpd_tls_key_file = /etc/ssl/certs/smtpd.key
+smtpd_tls_cert_file = /etc/ssl/certs/smtpd.crt" >> /etc/postfix/main.cf && \
     mv /etc/pki/dovecot/certs/dovecot.pem /tmp && \
     mv /etc/pki/dovecot/private/dovecot.pem /tmp && \
-    /usr/libexec/dovecot/mkcert.sh
+    /usr/libexec/dovecot/mkcert.sh && \
+    touch /etc/ssl/certs/smtpd.key && \
+    chmod 600 /etc/ssl/certs/smtpd.key && \
+    openssl genrsa 1024 > /etc/ssl/certs/smtpd.key && \
+    openssl req -new -key /etc/ssl/certs/smtpd.key -x509 -days 3650 -config /etc/pki/dovecot/dovecot-openssl.cnf -out /etc/ssl/certs/smtpd.key && \
+RUN postfix start && /usr/sbin/dovecot -F -c /etc/dovecot/dovecot.conf && postfix start
