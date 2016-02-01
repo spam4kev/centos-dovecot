@@ -21,17 +21,16 @@ RUN yum install -y dovecot && \
     sed -i 's/#mynetworks = 168.100.189.0\/28/mynetworks = 10.11.11.0\/24/' /etc/postfix/main.cf && \
     sed -i 's/inet_interfaces = localhost/inet_interfaces = all/' /etc/postfix/main.cf && \
     echo "0.0.0.0 OK" >> /etc/postfix/access && \
-    echo "smtpd_sasl_type = dovecot
-smtpd_sasl_path = private/auth
-smtpd_sasl_auth_enable = yes
-broken_sasl_auth_clients = yes
-smtpd_recipient_restrictions =
-   permit_mynetworks
-   permit_sasl_authenticated
-   reject_unauth_destination
-" >> /etc/postfix/main.cf && \
-    echo "smtpd_tls_key_file = /etc/ssl/certs/smtpd.key
-smtpd_tls_cert_file = /etc/ssl/certs/smtpd.crt" >> /etc/postfix/main.cf && \
+    echo "smtpd_sasl_type = dovecot" >> /etc/postfix/main.cf && \
+    echo "smtpd_sasl_path = private/auth" >> /etc/postfix/main.cf && \
+    echo "smtpd_sasl_auth_enable = yes" >> /etc/postfix/main.cf && \
+    echo "broken_sasl_auth_clients = yes" >> /etc/postfix/main.cf && \
+    echo "smtpd_recipient_restrictions =" >> /etc/postfix/main.cf && \
+    echo "   permit_mynetworks" >> /etc/postfix/main.cf && \
+    echo "   permit_sasl_authenticated" >> /etc/postfix/main.cf && \
+    echo "   reject_unauth_destination " >> /etc/postfix/main.cf && \
+    echo "smtpd_tls_key_file = /etc/ssl/certs/smtpd.key" >> /etc/postfix/main.cf && \
+    echo "smtpd_tls_cert_file = /etc/ssl/certs/smtpd.crt" >> /etc/postfix/main.cf && \
     mv /etc/pki/dovecot/certs/dovecot.pem /tmp && \
     mv /etc/pki/dovecot/private/dovecot.pem /tmp && \
     /usr/libexec/dovecot/mkcert.sh && \
