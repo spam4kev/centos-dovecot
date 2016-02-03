@@ -1,4 +1,6 @@
 #cloud-config
+runcmd:
+ - /etc/init.d/network restart
 
 package_upgrade: true
 
