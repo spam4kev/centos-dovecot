@@ -2,9 +2,9 @@
 #!!!!!not working!!! 2/5/16
 runcmd:
  - dhclient
- - [ curl, "https://raw.githubusercontent.com/spam4kev/centos-dovecot/master/userData.sh", -o, userdata.sh ]
- - chmod +x userdata.sh
- - [ sh, -c, "userdata.sh" ]
+ - [ curl, "https://raw.githubusercontent.com/spam4kev/centos-dovecot/master/userData.sh", -o, /root/userdata.sh ]
+ - chmod +x /root/userdata.sh
+ - /root/userdata.sh
 users:
   - default
   - name: fitzhenk
