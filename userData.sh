@@ -34,7 +34,7 @@ openssl req -new -key /etc/ssl/certs/smtpd.key -x509 -days 3650 -config /etc/pki
 echo 'mailbox_command = /usr/libexec/dovecot/dovecot-lda -f "$SENDER" -a "$RECIPIENT"' >> /etc/postfix/main.cf
 echo "root:           fitzhenk" >> /etc/aliases
 newaliases
-systemclt enable dovecot.service
+systemctl enable dovecot.service
 systemctl enable postfix.service
 systemctl start postfix.service
 systemctl start dovecot.service
