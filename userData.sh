@@ -1,6 +1,6 @@
 #!/bin/sh
 
-
+dhclient
 yum install dovecot postfix -y
 sed -i 's/#protocols =/protocols =/' /etc/dovecot/dovecot.conf
 sed -i 's/emailAddress=postmaster@example.com/emailAddress=spam4kev@gmail.com/' /etc/pki/dovecot/dovecot-openssl.cnf
