@@ -39,7 +39,7 @@ firewall-offline-cmd --add-service=ldap
 firewall-offline-cmd --add-service=ldaps
 firewall-offline-cmd --add-port=143/tcp
 firewall-offline-cmd --add-service=imaps
-firewall-cmd --reload
+#firewall-cmd --reload
 systemctl enable dovecot.service
 systemctl enable postfix.service
 systemctl start postfix.service
