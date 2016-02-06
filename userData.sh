@@ -14,7 +14,7 @@ sed -i 's/#myorigin/myorigin/' /etc/postfix/main.cf
 sed -i 's/#myhostname = host.domain.tld/myhostname = thefitz1.ddns.net/' /etc/postfix/main.cf
 sed -i 's/#mynetworks = 168.100.189.0\/28/mynetworks = 0.0.0.0\/0/' /etc/postfix/main.cf
 sed -i 's/inet_interfaces = localhost/inet_interfaces = all/' /etc/postfix/main.cf
-sed -i 's/#relayhost = [gateway.my.domain]/relayhost = [smtp.verizon.net]/' /etc/postfix/main.cf
+sed -i 's/#relayhost = \[gateway.my.domain\]/relayhost = \[smtp.verizon.net\]/' /etc/postfix/main.cf
 echo "0.0.0.0 OK" >> /etc/postfix/access
 echo "smtpd_sasl_type = dovecot" >> /etc/postfix/main.cf
 echo "smtpd_sasl_path = private/auth" >> /etc/postfix/main.cf
