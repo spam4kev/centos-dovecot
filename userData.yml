@@ -1,4 +1,6 @@
 #cloud-config
+# spam4kev@gmail.com 2/6/16
+# This file is written as an OpenStack userdata equivalent to the Dockerfile in this GitHub project
 runcmd:
  - dhclient
  - yum update -y
