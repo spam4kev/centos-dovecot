@@ -3,7 +3,8 @@
 dhclient
 yum install dovecot postfix -y
 sed -i 's/#protocols =/protocols =/' /etc/dovecot/dovecot.conf
-sed -i 's/emailAddress=postmaster@example.com/emailAddress=spam4kev@gmail.com/' /etc/pki/dovecot/dovecot-openssl.cnf
+sed -i 's/emailAddress=postmaster@example.com/emailAddress=fitzhenk@thefitz1.ddns.net/' /etc/pki/dovecot/dovecot-openssl.cnf
+sed -i 's/CN=imap.example.com/CN=thefitz1.ddns.net/' /etc/pki/dovecot/dovecot-openssl.cnf
 sed -i 's/#mail_location =/mail_location = mbox:~\/mail:INBOX=\/var\/mail\/\%u/' /etc/dovecot/conf.d/10-mail.conf
 sed -i 's/#mail_privileged_group =/mail_privileged_group = mail/' /etc/dovecot/conf.d/10-mail.conf
 sed -i 's/auth_mechanisms = plain/auth_mechanisms = plain login/' /etc/dovecot/conf.d/10-auth.conf
