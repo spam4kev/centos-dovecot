@@ -5,7 +5,7 @@ runcmd:
  - curl "https://raw.githubusercontent.com/spam4kev/centos-dovecot/master/userData.sh" -o /root/userdata.sh
  - chmod +x /root/userdata.sh
  - /root/userdata.sh
- - systemctl restart firewalld
+ - systemctl restart firewalld.service
 users:
   - default
   - name: fitzhenk
