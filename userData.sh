@@ -34,11 +34,12 @@ openssl req -new -key /etc/ssl/certs/smtpd.key -x509 -days 3650 -config /etc/pki
 echo 'mailbox_command = /usr/libexec/dovecot/dovecot-lda -f "$SENDER" -a "$RECIPIENT"' >> /etc/postfix/main.cf
 echo "root:           fitzhenk" >> /etc/aliases
 newaliases
-firewall-offline-cmd --permanent --add-service=smtp
-firewall-offline-cmd --permanent --add-service=ldap
-firewall-offline-cmd --permanent --add-service=ldaps
-firewall-offline-cmd --permanent --add-port=143/tcp
-firewall-offline-cmd --permanent --add-service=imaps
+firewall-offline-cmd --add-service=smtp
+firewall-offline-cmd --add-service=ldap
+firewall-offline-cmd --add-service=ldaps
+firewall-offline-cmd --add-port=143/tcp
+firewall-offline-cmd --add-service=imaps
+firewall-cmd --reload
 systemctl enable dovecot.service
 systemctl enable postfix.service
 systemctl start postfix.service
