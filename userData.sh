@@ -38,6 +38,7 @@ firewall-cmd --permanent --add-service=smtp
 firewall-cmd --permanent --add-service=ldap
 firewall-cmd --permanent --add-service=ldaps
 #firewall-cmd --permanent --add-service=imap
+firewall-cmd --permanent --add-port=143/tcp
 firewall-cmd --permanent --add-service=imaps
 systemctl enable dovecot.service
 systemctl enable postfix.service
