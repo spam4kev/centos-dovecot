@@ -22,4 +22,5 @@ runcmd:
  - mkdir /home/spam4kev/mail/.imap/INBOX -p
  - chown spam4kev /home/spam4kev/mail/.imap/INBOX
  - chgrp mail /home/spam4kev/mail/.imap -R
+ - chmod 600 /var/mail/*
 
