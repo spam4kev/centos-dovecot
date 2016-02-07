@@ -1,13 +1,6 @@
 #cloud-config
 # spam4kev@gmail.com 2/6/16
 # This file is written as an OpenStack userdata equivalent to the Dockerfile in this GitHub project
-runcmd:
- - dhclient
- - yum update -y
- - curl "https://raw.githubusercontent.com/spam4kev/centos-dovecot/master/userData.sh" -o /root/userdata.sh
- - chmod +x /root/userdata.sh
- - /root/userdata.sh
- - systemctl restart firewalld.service
 users:
   - default
   - name: fitzhenk
@@ -18,4 +11,15 @@ users:
     lock-passwd: true
     ssh-authorized-keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDRKqdKKEuOCc+h+oagKolmH11AOrODDCCYBqgWz0ouVr2FTNelevM3J2e+ym/prE4Js/5yOyUPwz23LgiSEM5JNnGhJPSgpIU7NwybNDHe7q7Xa5aRoIoJ+d7ls21Kp0ZUnQxroTM0NOl/5hv1i0HHI8/WtMLNCbOqoGJQIfOO6mqRTxWtCpXzskPeL7R8HAM0wty+HJ+aF3B/RBJKHWpU6m5t1LXuiqDLlCtFUfFp20E9SJbTkf9+kiX5XlTSRcOkex0OTyiK/jfVIRKuyytZPP7/BV/Hvy1DyIcgRLyoKRPuuLwpp9elcE4CHLp1TnCwR6XkBrrZAlcZdddozTWB imported-openssh-key
+
+runcmd:
+ - dhclient
+ - yum update -y
+ - curl "https://raw.githubusercontent.com/spam4kev/centos-dovecot/master/userData.sh" -o /root/userdata.sh
+ - chmod +x /root/userdata.sh
+ - /root/userdata.sh
+ - systemctl restart firewalld.service
+ - mkdir /home/fitzhenk/mail/.imap/INBOX -p
+ - chown fitzhenk /home/fitzhenk/mail/.imap/INBOX
+ - chgrp mail /home/fitzhenk/mail/.imap -R
 
