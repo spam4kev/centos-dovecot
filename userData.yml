@@ -19,7 +19,7 @@ runcmd:
  - chmod +x /root/userdata.sh
  - /root/userdata.sh
  - systemctl restart firewalld.service
- - mkdir /home/fitzhenk/mail/.imap/INBOX -p
- - chown fitzhenk /home/fitzhenk/mail/.imap/INBOX
- - chgrp mail /home/fitzhenk/mail/.imap -R
+ - mkdir /home/spam4kev/mail/.imap/INBOX -p
+ - chown spam4kev /home/spam4kev/mail/.imap/INBOX
+ - chgrp mail /home/spam4kev/mail/.imap -R
 
