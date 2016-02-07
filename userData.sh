@@ -3,14 +3,14 @@
 dhclient
 yum install dovecot postfix -y
 sed -i 's/#protocols =/protocols =/' /etc/dovecot/dovecot.conf
-sed -i 's/emailAddress=postmaster@example.com/emailAddress=fitzhenk@thefitz1.ddns.net/' /etc/pki/dovecot/dovecot-openssl.cnf
+sed -i 's/emailAddress=postmaster@example.com/emailAddress=spam4kev@thefitz1.ddns.net/' /etc/pki/dovecot/dovecot-openssl.cnf
 sed -i 's/CN=imap.example.com/CN=thefitz1.ddns.net/' /etc/pki/dovecot/dovecot-openssl.cnf
 sed -i 's/#mail_location =/mail_location = mbox:~\/mail:INBOX=\/var\/mail\/\%u/' /etc/dovecot/conf.d/10-mail.conf
 sed -i 's/#mail_privileged_group =/mail_privileged_group = mail/' /etc/dovecot/conf.d/10-mail.conf
 sed -i 's/auth_mechanisms = plain/auth_mechanisms = plain login/' /etc/dovecot/conf.d/10-auth.conf
 sed -i '/unix_listener \/var\/spool\/postfix\/private\/auth/,/  #\}/{s/#/ /g;}' /etc/dovecot/conf.d/10-master.conf
 sed -i 's/#mydomain = domain.tld/mydomain = thefitz1.ddns.net/' /etc/postfix/main.cf
-sed -i 's/#myorigin/myorigin/' /etc/postfix/main.cf
+sed -i 's/#myorigin = $mydomain/myorigin = $mydomain/' /etc/postfix/main.cf
 sed -i 's/#myhostname = host.domain.tld/myhostname = thefitz1.ddns.net/' /etc/postfix/main.cf
 sed -i 's/#mynetworks = 168.100.189.0\/28/mynetworks = 0.0.0.0\/0/' /etc/postfix/main.cf
 sed -i 's/inet_interfaces = localhost/inet_interfaces = all/' /etc/postfix/main.cf
@@ -34,7 +34,7 @@ chmod 600 /etc/ssl/certs/smtpd.key
 openssl genrsa 1024 > /etc/ssl/certs/smtpd.key
 openssl req -new -key /etc/ssl/certs/smtpd.key -x509 -days 3650 -config /etc/pki/dovecot/dovecot-openssl.cnf -out /etc/ssl/certs/smtpd.key
 echo 'mailbox_command = /usr/libexec/dovecot/dovecot-lda -f "$SENDER" -a "$RECIPIENT"' >> /etc/postfix/main.cf
-echo "root:           fitzhenk" >> /etc/aliases
+echo "root:           spam4kev" >> /etc/aliases
 newaliases
 firewall-offline-cmd --add-service=smtp
 firewall-offline-cmd --add-service=ldap
