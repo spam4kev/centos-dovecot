@@ -3,7 +3,7 @@
 # This file is written as an OpenStack userdata equivalent to the Dockerfile in this GitHub project
 users:
   - default
-  - name: fitzhenk
+  - name: spam4kev
     gecos: kev
     sudo: ALL=(ALL) NOPASSWD:ALL
     groups: users

@@ -42,10 +42,9 @@ firewall-offline-cmd --add-service=ldaps
 firewall-offline-cmd --add-port=143/tcp
 firewall-offline-cmd --add-service=imaps
 #firewall-cmd --reload
-echo "smtp.verizon.net thefitz1-dovecot:$(openssl rand -base64 32)" > /etc/postfix/sasl-passwd
-postmap hash:/etc/postfix/sasl_passwd
-chmod 600 /etc/postfix/sasl_passwd.db
-rm -f /etc/postfix/sasl-passwd
+#echo "smtp.verizon.net thefitz1-dovecot:$(openssl rand -base64 32)" > /etc/postfix/sasl_passwd
+#postmap hash:/etc/postfix/sasl_passwd 
+#chmod 600 /etc/postfix/sasl_passwd.db /etc/postfix/sasl_passwd
 systemctl enable dovecot.service
 systemctl enable postfix.service
 systemctl start postfix.service

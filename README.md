@@ -2,5 +2,5 @@
 MTA IMAP Email server
 
 -  for deploying in a CentOS7 VM in openstack, pass this as userdata (confirmed working with RDO packstack deploy of Liberty release)a
-  -  because this setup uses an ISP SMTP as a send relay, the sasl-passwords.db file must contain an active account username/password
+  -  If your ISP requires authentication for relay, uncomment the sasl commands and after deploy use the random pw in sasl_passwd to set an ISP sub account.
   -  copy paste the userData.yml into the userdata field in openstack when creating the instance.
