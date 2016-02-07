@@ -1,7 +1,7 @@
 #!/bin/sh
 
 dhclient
-yum install dovecot postfix -y
+yum install dovecot postfix cyrus-sasl cyrus-sasl-plain -y
 sed -i 's/#protocols =/protocols =/' /etc/dovecot/dovecot.conf
 sed -i 's/emailAddress=postmaster@example.com/emailAddress=spam4kev@thefitz1.ddns.net/' /etc/pki/dovecot/dovecot-openssl.cnf
 sed -i 's/CN=imap.example.com/CN=thefitz1.ddns.net/' /etc/pki/dovecot/dovecot-openssl.cnf
