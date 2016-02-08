@@ -9,5 +9,5 @@ MTA IMAP Email server
   -  if you alreadt have a user and pw to use as an ISP relay account, after deploy, update /etc/postfix/sasl_passwd "[relay.domain.com] <isp username>:<isp user pw>" followed by "rm -f /etc/postfix/sasl_passwd";postmap /etc/postfix/sasl_passwd" to update the hash db.
   -  to freshen things up after the above changes
 ```bash
-stemclt restart posfix.service
+systemctl restart postfix.service
 ```
