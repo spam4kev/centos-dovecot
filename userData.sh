@@ -21,8 +21,8 @@ echo "smtp_sasl_auth_enable = yes" >> /etc/postfix/main.cf
 echo "smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd" >> /etc/postfix/main.cf
 echo "smtpd_sasl_type = dovecot" >> /etc/postfix/main.cf
 echo "smtpd_sasl_path = private/auth" >> /etc/postfix/main.cf
+echo "broken_sasl_auth_clients = yes" >> /etc/postfix/main.cf
 echo "smtp_sasl_security_options = noanonymous" >> /etc/postfix/main.cf
-#echo "broken_sasl_auth_clients = yes" >> /etc/postfix/main.cf
 echo "smtpd_recipient_restrictions =" >> /etc/postfix/main.cf
 echo "   permit_mynetworks" >> /etc/postfix/main.cf
 echo "   permit_sasl_authenticated" >> /etc/postfix/main.cf
@@ -32,6 +32,9 @@ echo "smtpd_use_tls = yes" >> /etc/postfix/main.cf
 echo "smtpd_tls_auth_only = yes" >> /etc/postfix/main.cf
 echo "smtpd_tls_key_file = /etc/ssl/certs/smtpd.key" >> /etc/postfix/main.cf
 echo "smtpd_tls_cert_file = /etc/ssl/certs/smtpd.crt" >> /etc/postfix/main.cf
+echo "smtpd_tls_security_level = may" >> /etc/postfix/main.cf
+echo "smtpd_tls_loglevel = 1" >> /etc/postfix/main.cf
+echo "smtpd_tls_received_header = yes" >> /etc/postfix/main.cf
 mv /etc/pki/dovecot/certs/dovecot.pem /tmp
 mv /etc/pki/dovecot/private/dovecot.pem /tmp
 /usr/libexec/dovecot/mkcert.sh
